@@ -60,7 +60,7 @@ func (pl *pathLocks) lock(path string) {
 
 		if time.Since(started) > lockTimeout {
 			log.WithField("path", path).Warning("WARNING: Timeout while waiting for lock, ignoring lock")
-			pl.lockPaths[path] = 1
+			pl.lockPaths[path] = 0
 			pl.mutex.Unlock()
 			return
 		}
