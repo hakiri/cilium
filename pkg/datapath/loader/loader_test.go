@@ -45,6 +45,11 @@ func Test(t *testing.T) {
 	TestingT(t)
 }
 
+func (s *LoaderTestSuite) TearDownTest(c *C) {
+	os.Remove("/sys/fs/bpf/tc/globals/cilium_policy_foo")
+	os.Remove("/sys/fs/bpf/tc/globals/cilium_ep_config_111")
+}
+
 // runTests configures devices for running the whole testsuite, and runs the
 // tests. It is kept separate from TestMain() so that this function can defer
 // cleanups and pass the exit code of the test run to the caller which can run
